@@ -17,7 +17,9 @@ You will need the following Node.js packages:
 
 You will need to setup a .env / config.json containing your discord token.
 - .env
-    ```DISCORD_TOKEN=your-token-goes-here```
+    ```
+    DISCORD_TOKEN=your-token-goes-here
+    ```
 - config.json
     ```
     {
