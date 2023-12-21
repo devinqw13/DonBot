@@ -3,8 +3,8 @@ const { useQueue } = require('discord-player');
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('stop')
-		.setDescription('Stops the current playback!'),
+		.setName('pause')
+		.setDescription('Pauses the current playback!'),
 	async execute(interaction) {
         
         const queue = useQueue(interaction.guild.id);
@@ -19,10 +19,22 @@ module.exports = {
             return;
         }
 
-        queue.delete();
+        // queue.node.setPaused(!queue.node.isPaused());
+        if (!queue.node.isPaused()) {
+            queue.node.setPaused(true);
+        } 
+        else {
+            const successEmbed = new EmbedBuilder()
+            .setDescription('⏸ Music is already paused!')
+            .setColor(0xEED202);
+
+            await interaction.reply({ embeds: [successEmbed], ephemeral: true });
+
+            return;
+        }
 
         const successEmbed = new EmbedBuilder()
-            .setDescription('⏹ Successfully stopped the music!')
+            .setDescription('⏸ Successfully paused the music!')
             .setColor(0x008000);
 
         await interaction.reply({ embeds: [successEmbed], ephemeral: true });
