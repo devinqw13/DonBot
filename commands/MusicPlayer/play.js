@@ -14,8 +14,13 @@ module.exports = {
 		const player = useMainPlayer();
 
 		if (!interaction.member.voice.channel) {
-			await interaction.reply({ content: 'You must be in a voice channel to use this command', ephemeral: true });
-			return;
+			const notPlayingEmbed = new EmbedBuilder()
+                .setAuthor({ name: 'Not available!'})
+                .setDescription('You must be in a voice channel to use this command!')
+                .setColor(0x990000);
+
+            await interaction.reply({ embeds: [notPlayingEmbed], ephemeral: true });
+            return;
 		}
 
 		// const queue = await player.createQueue(interaction.guild);
